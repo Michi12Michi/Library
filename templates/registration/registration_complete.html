@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ block.super }}Registration complete{% endblock title %}
+
+{% block css_files %}
+    <link rel="stylesheet" type="text/css" href="{% static 'core/registration.css' %}">
+{% endblock css_files %}
+
+{% block content %}
+<main>
+    <section class="container-fluid rgstrtn-cmplt" alt="registration complete section">
+        <h2 class="mb-4">Registration has been completed successfully!</h2>
+        <p>A summarizing email has been sent to the email address you provided. Have a nice journey!</p>
+    </section>
+</main>
+{% endblock content %}
+

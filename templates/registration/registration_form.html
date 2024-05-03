@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ block.super }}Register{% endblock title %}
+{% block css_files %}
+    <link rel="stylesheet" type="text/css" href="{% static 'core/registration.css' %}">
+{% endblock css_files %}
+
+{% block content %}
+<main>
+    <section class="container-fluid rgstrtn-sctn" alt="registration section">
+        <h2 class="col-6 mb-4">Please, fill in the registration form:</h2>
+        <form class="col-4 my-3" method="POST">
+            {% csrf_token %}
+            {{form|crispy}}
+            <div class="container npt-grp">
+                <input class="btn" type="submit" value="Register">
+            </div>
+        </form>
+    </secion>
+</main>
+{% endblock content %}
+

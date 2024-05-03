@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ block.super }}Login{% endblock title %}
+{% block css_files %}
+    <link rel="stylesheet" type="text/css" href="{% static 'core/login.css' %}">
+{% endblock css_files %}
+
+{% block content %}
+<main>
+    <section class="container-fluid lgn-sctn" alt="login section">
+        <h2 class="col-6 mb-4">Please, fill in the login form:</h2>
+        <form class="col-4 my-3" method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            {{form|crispy}}
+            <p class="mb-2"><a href="{% url 'password_reset' %}">Password lost or forgotten?</a></p>
+            <div class="container npt-grp">
+                <input class="btn" type="submit" value="Login">
+                <input type="hidden" name="next" value="{{ next }}">
+            </div>
+        </form>
+    </section>
+</main>
+{% endblock content %}
