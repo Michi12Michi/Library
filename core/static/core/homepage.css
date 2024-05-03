@@ -1,0 +1,14 @@
+/* homepage.html */
+
+/* --WELCOME SECTION-- */
+.wlcm-sctn h2 {
+    color: rgb(155, 0, 0);
+}
+.wlcm-sctn p {
+    text-align: justify;
+}
+.wlcm-sctn a {
+    text-decoration: none;
+    color: rgb(155, 0, 0);
+}
+

@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ block.super }}{{ book.title }}{% endblock title %}
+{% block css_files %}
+    <link rel="stylesheet" type="text/css" href="{% static 'core/book_list.css' %}">
+{% endblock css_files %}
+{% block content %}
+<main class="">
+    <section class="container-fluid rslt-sctn mb-4" alt="book main details section">
+        <div class="row d-flex mb-4">
+          <div class="book-image col-md-4">
+            <img class="mb-2" src="https://picsum.photos/180/270?random=1">
+          </div>
+          <div class="book-infos col-md-7">
+            <h2>{{ book.title }}</h2>
+            <p class="mb-2">in: <em>{{ book.section.name }}</em></p>
+            <ul class="bk-ctgrs mb-2">
+                {% for cat in book.category.all %}
+                    <li class="">{{ cat }}</li>
+                {% endfor %}
+            </ul>
+            <p><b>Abstract: </b>{{ book.description }}</p>
+            <menu>
+                <li>
+                    <a href="{% url 'book-checkout' book.pk %}">
+                        <button class="btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shop" viewBox="0 0 16 16">
+                                <path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.37 2.37 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0M1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5M4 15h3v-5H4zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zm3 0h-2v3h2z"/>
+                            </svg> Hold
+                        </button>
+                    </a>
+                </li>
+
+                {% if book.is_hold or book.is_checkout %}
+                  <li class="gen-info" style="color: #BF3131">Not available.</li>                 
+                {% else %}
+                  <li class="gen-info">Available!</li>
+                {% endif %}
+            </menu>
+          </div>
+        </div>
+        <hr>
+        <section class="container-fluid fll-dtls-sctn" alt="book full details section">
+          <h3 class="mb-4">Details</h3>
+          <ul class="mx-0 my-0 p-0">
+            <li><strong>Title: </strong>{{ book.title }}</li>
+            <li>
+              <strong>Edition: </strong>
+              {% if book.edition %}
+                {{ book.edition.name }},
+              {% endif %}
+              {% if book.edition.city %}
+                {{ book.edition.city }}, 
+              {% endif %}
+              {{ book.year|date:"Y" }}
+            </li>
+            <li><strong>Description: </strong>
+              {% if book.pages or book.physical_description %}
+                {% if book.pages %} 
+                  {{ book.pages }} pgs
+                {% endif %}
+                {% if book.physical_description %}
+                  , {{ book.physical_description }}
+                {% endif %}
+              {% else %}
+                No description available
+              {% endif %}
+            </li>
+            <li><strong>ISBN: </strong>
+              {% if book.isbn %}
+                {{ book.isbn }}
+              {% else %}
+                Not available
+              {% endif %}
+            </li>
+            <li><strong>Other names: </strong>
+              {% with authors=book.authors.all %}
+                {% for author in authors %}
+                  {% if forloop.last %}
+                    <a class="author-link" href="{% url 'books-list-view' author.slug %}">{{ author }}</a>
+                  {% else %}
+                    <a class="author-link" href="{% url 'books-list-view' author.slug %}">{{ author }}</a>; 
+                  {% endif %}
+                {% endfor %}
+              {% endwith %}
+            </li>
+          </ul>
+        </section>
+        <hr>
+
+    </section>
+</main>
+{% endblock content %}

@@ -1,0 +1,8 @@
+/* help_page.html */
+
+.hlp-sctn h2, .hlp-sctn h3, .hlp-sctn h4 {
+    color: rgb(155, 0, 0);
+}
+.hlp-sctn p {
+    text-align: justify;
+}

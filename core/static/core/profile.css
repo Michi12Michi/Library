@@ -1,0 +1,60 @@
+/* profile_manage.html */
+/* book_request.html */
+/* hold_details.html */
+
+h2, .prfl-sctn strong {
+    color: rgb(155, 0, 0);
+}
+
+p {
+    text-align: justify;
+}
+
+.prfl-sctn ul {
+    list-style: none;
+    padding-left: 0px;
+}
+
+.prfl-sctn ul li {
+    margin-bottom: 8px;
+}
+
+.prfl-sctn a, .hold-element ul a {
+    text-decoration: none;
+    color: #BF3131;
+}
+
+.hold-element {
+    background-color: #F3EDC8;
+    border-radius: 5px;
+}
+
+.hold-element ul {
+    display: flex;
+    list-style: none;
+}
+
+.hold-element p {
+    color: #BF3131;
+    text-align: center;
+}
+
+.hold-element li {
+    align-content: center;
+}
+
+.hold-element li:last-child {
+    text-align: end;
+}
+
+.hold-element li .btn {
+    padding: 3px 9px;
+    border: 1px solid #BF3131;
+    color: #BF3131;
+}
+
+.hold-element li .btn:hover {
+    border: 1px solid #BF3131;
+    color: #F3EDC8;
+    background-color: #BF3131;
+}

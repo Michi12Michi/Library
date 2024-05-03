@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ block.super }}Help{% endblock title %}
+{% block css_files %}
+  <link rel="stylesheet" type="text/css" href="{% static 'core/help_page.css' %}">
+{% endblock css_files %}
+    
+{% block content %}
+<main class="">
+  <section class="container-fluid hlp-sctn mb-4" alt="help section">
+    <h2 class="mb-4">Need help?</h2>
+    <p>We are glad to inform you that you are in the right place!</p>
+    <hr>
+    <h3 class="mb-4">Please, refer to the following topics:</h3>
+    <ol>
+        {% for i in "01234"|make_list %}
+            <li>{% lorem 3 w random %}</li>
+        {% endfor %}
+    </ol>
+    <hr>
+    {% for i in "01234"|make_list %}
+        <h4 class="my-2">{{forloop.counter}}) {% lorem 3 w random %}</h4>
+        {% lorem 1 p %}
+    {% endfor %}
+  </section>
+</main>
+{% endblock content %}

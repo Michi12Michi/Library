@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ block.super }}Search results{% endblock title %}
+{% block css_files %}
+    <link rel="stylesheet" type="text/css" href="{% static 'core/all_list.css' %}">
+{% endblock css_files %}
+    
+{% block content %}
+<main class="">
+    <section class="container-fluid srch-sctn mb-4" alt="introductory section">
+        <h2 class="mb-4">Search results</h2>
+        <p>Results have been regrouped into Authors, Books and Categories.</p>
+        <hr>
+    </section>
+    <section class="container-fluid lst-sctn mb-4" alt="authors search list section">
+        <h3>Authors:</h3>
+        {% if authors %}
+            <ul>
+                {% for author in authors %}
+                    <li class="col-md-4 col-sm-6 col"><a href="{% url 'books-list-view' author.slug %}">{{ author }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No authors found.</p>
+        {% endif %}
+        <hr>
+    </section>
+    <section class="container-fluid lst-sctn mb-4" alt="books search list section">
+        <h3>Books:</h3>
+        {% if books %}
+            <ul>
+                {% for book in books %}
+                    {% with slug=book.authors.first.slug %}
+                        <li class="col-md-4 col-sm-6 col"><a href="{% url 'book-detail' slug=slug pk=book.pk %}">{{ book.title }}</a></li>
+                    {% endwith %}
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No books found.</p>
+        {% endif %}
+        <hr>
+    </section>
+    <section class="container-fluid lst-sctn mb-4" alt="categories search list section">
+        <h3>Categories:</h3>
+        {% if categories %}
+            <ul>
+                {% for category in categories %}
+                    <li class="col-md-4 col-sm-6 col"><a href="#">{{ category.name }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No categories found.</p>
+        {% endif %}
+        <hr>
+    </section>
+</main>
+<script>
+    document.getElementById("searchForm").addEventListener("submit", function() {
+        document.getElementById("searchInput").value=""
+    });
+</script>
+{% endblock %}

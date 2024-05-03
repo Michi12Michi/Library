@@ -1,0 +1,29 @@
+/* all_authors_list.html */
+/* search.html */
+
+.thrs-lst-sctn h2, .bks-lst-sctn h2, .srch-sctn h2 {
+    color: rgb(155, 0, 0);
+}
+
+.thrs-lst-sctn p, .srch-sctn p {
+    text-align: justify;
+}
+
+.lst-sctn h3 {
+    color: #BF3131;
+}
+
+.lst-sctn a {
+    text-decoration: none;
+}
+
+.lst-sctn ul {
+    display: flex;
+    list-style: none;
+    padding: 0px;
+}
+
+.pgntn-sctn {
+    margin-left: 0px;
+    margin-right: 0px;
+}

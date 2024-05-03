@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ block.super }}Homepage{% endblock title %}
+{% block css_files %}
+  <link rel="stylesheet" type="text/css" href="{% static 'core/homepage.css' %}">
+{% endblock css_files %}
+    
+{% block content %}
+<main class="">
+  <section class="container-fluid wlcm-sctn mb-4" alt="welcome section">
+    <h2 class="mb-4">Welcome to the Central Random Library</h2>
+    {% if not request.user.is_authenticated %}
+      <h3 class="my-2">Let's get started!</h3>
+      <p>Not a member? Consider <a href="{% url 'register' %}">registering</a> to our website! You could borrow many, many (<em>really, how many? Hmm...</em>) books!</p>
+    {% else %}
+      <p>Nice to see you again, <strong>{{ request.user.first_name }} {{ request.user.last_name }}</strong>!</p>
+      <p>Lack of inspiration? Feel free to try out our <a href="{% url 'random-book' %}">random book picker</a>!</p>
+    {% endif %}
+    <hr>
+  </section>
+  <section class="container-fluid nws-sctn mb-4" alt="new books section"> 
+    <h2 class="mb-2">Here's a selection of freshly avilable books!</h2>
+    {% lorem 3 p %}
+    <hr>
+  </section>
+    <section class="container-fluid crsll-sctn mb-4" alt="photo carousel section">
+      <div id="carouselExampleInterval" class="carousel slide col" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active" data-bs-interval="2000">
+            <img class="img-fluid" src="https://picsum.photos/1342/300?random=1" class="d-block w-100" alt="random image from lorempicsum">
+          </div>
+          <div class="carousel-item" data-bs-interval="2000">
+            <img class="img-fluid" src="https://picsum.photos/1342/300?random=2" class="d-block w-100" alt="random image from lorempicsum">
+          </div>
+          <div class="carousel-item" data-bs-interval="2000">
+            <img class="img-fluid" src="https://picsum.photos/1342/300?random=3" class="d-block w-100" alt="random image from lorempicsum">
+          </div>
+        </div>
+      </div>
+  </section>
+</main>
+{% endblock content %}

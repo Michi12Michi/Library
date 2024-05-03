@@ -1,0 +1,28 @@
+/* login.html */
+
+.lgn-sctn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.lgn-sctn .npt-grp {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.lgn-sctn h2 {
+    text-align: center;
+    color: rgb(155, 0, 0);
+}
+.lgn-sctn .btn {
+    border: 1px solid #BF3131;
+    color: #BF3131;
+}
+.lgn-sctn .btn:hover {
+    border: 1px solid #BF3131;
+    color: #F3EDC8;
+    background-color: #BF3131;
+}
+.lgn-sctn p {
+    text-align: center;
+}

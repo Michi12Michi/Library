@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ block.super }}Hold request{% endblock title %}
+{% block css_files %}
+    <link rel="stylesheet" type="text/css" href="{% static 'core/profile.css' %}">
+{% endblock css_files %}
+    
+{% block content %}
+<main class="">
+    <section class="container-fluid rqst-sctn mb-4" alt="request section">
+        <h2 class="mb-4">Hold process submitted successfully!</h2>
+        <p>{{ message }}</p>
+        {% if success %}
+            <p>Please, remember that you can always manage your holds or waiting lists in the <a href="{% url 'profile-view' %}">profile</a> section.</p> 
+        {% endif %}
+    </section>
+</main>
+{% endblock content %}

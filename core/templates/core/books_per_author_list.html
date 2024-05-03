@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ block.super }}{{ author }}{% endblock title %}
+{% block css_files %}
+    <link rel="stylesheet" type="text/css" href="{% static 'core/book_list.css' %}">
+{% endblock css_files %}
+{% block content %}
+<main class="">
+    <section class="container-fluid rslt-sctn mb-4" alt="book list summary section">
+        <h2 class="mb-4">Results for {{ author }}:</h2>
+    </section>
+    <section class="container-fluid rslt-sctn mb-4" alt="book list result section">
+    {% if books %}
+        {% for p in books %}
+            {% include "core/books_preview.html" with author=author book=p only %}
+            <hr>
+        {% endfor %}
+    </section>
+    <section class="container fluid pgntn-sctn mb-2" alt="pagination section">
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+        
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+        
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </section>
+    {% else %}
+        <p>No results found, sorry for the inconvenience.</p>
+    </section>
+    {% endif %}
+</main>
+{% endblock content %}

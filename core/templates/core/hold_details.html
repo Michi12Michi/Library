@@ -1,0 +1,24 @@
+<article class="container-fluid hold-element">
+    <ul class="row m-0 p-2">
+        {% if notification %}
+            <p class="col">Your account has been temporarily deactivated. Please, check your email inbox.</p>
+        {% endif %}
+        <li class="col-md-5 px-2"><strong>Title</strong>: <a href="{% url 'book-detail' slug=author.slug pk=book.pk %}">{{ book.title }}</a></li>
+        <li class="col-md-3 px-2"><strong>Started @</strong>: {{ start|date:"l j M Y H:i" }}</li>
+        <li class="col-md-3 px-2">
+            {% if end %}
+                <strong>Expires @</strong>: {{ end|date:"l j M Y H:i" }}</li>
+            {% endif %}
+        <li class="col-md-1 px-2">
+            {% if type != 'checkout' and type == 'hold' %}
+                <a href="{% url 'delete-hold-book-view' pk=pk %}">
+                    <button class="btn">Delete</button>
+                </a>
+            {% elif type != 'checkout' and type == 'wait' %}
+                <a href="{% url 'delete-waitlist-book-view' pk=pk %}">
+                    <button class="btn">Delete</button>
+                </a>
+            {% endif %}
+        </li>
+    </ul>
+</article>

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ block.super }}Authors list{% endblock title %}
+{% block css_files %}
+    <link rel="stylesheet" type="text/css" href="{% static 'core/all_list.css' %}">
+{% endblock css_files %}
+    
+{% block content %}
+<main class="">
+    <section class="container-fluid thrs-lst-sctn mb-4" alt="introductory section">
+        <h2 class="mb-4">Full authors list</h2>
+        <p>We are proud to present our full list of authors. <em>What? Can't you find your favourite author? Contact our helpdesk to submit your request!</em></p>
+        <hr>
+    </section>
+    {% regroup authors by first_letter as letter_list %}
+        {% for letter in letter_list %}
+            {% if not forloop.last %}
+                <section class="container-fluid lst-sctn mb-4" alt="authors list section">
+                    <h3>{{ letter.grouper }}</h3>
+                    <ul>
+                        {% for item in letter.list %}
+                            <li class="col-md-4 col-sm-6 col"><a href="{% url 'books-list-view' item.slug %}">{{ item }}</a></li>
+                        {% endfor %}
+                    </ul>
+                    <hr>
+                </section>
+            {% else %}
+                <section class="container-fluid lst-sctn mb-4" alt="authors list section">
+                    <h3>{{ letter.grouper }}</h3>
+                    <ul>
+                        {% for item in letter.list %}
+                            <li class="col-md-4 col-sm-6 col"><a href="{% url 'books-list-view' item.slug %}">{{ item }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </section>
+            {% endif %}
+        {% endfor %}
+        <section class="container fluid pgntn-sctn mb-2" alt="pagination section">
+            <div class="pagination">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                        <a href="?page=1">&laquo; first</a>
+                        <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                    {% endif %}
+            
+                    <span class="current">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </span>
+            
+                    {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}">next</a>
+                        <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+        </section>
+</main>
+{% endblock %}
